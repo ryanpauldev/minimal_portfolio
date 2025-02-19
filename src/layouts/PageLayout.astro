@@ -4,6 +4,8 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import BackToTop from "@components/BackToTop.astro";
 import { SITE } from "@consts";
+import Particles from "astro-particles";
+import type { ISourceOptions } from "tsparticles-engine";
 
 type Props = {
   title: string;
@@ -11,14 +13,84 @@ type Props = {
 };
 
 const { title, description } = Astro.props;
+
+const options: ISourceOptions = {
+  background: {
+    color: "transparent", // ✅ Keeps background color transparent to work with CSS themes
+  },
+  fullScreen: {
+    zIndex: -1, // ✅ Ensures particles render behind content
+  },
+  particles: {
+    number: {
+      value: 500, // ✅ More stars for better density
+      density: {
+        enable: true,
+        area: 800, // ✅ Spread stars out
+      },
+    },
+    color: {
+      value: "#ffffff", // ✅ Default star color for dark mode
+    },
+    shape: {
+      type: "circle", // ✅ Stars are circular
+    },
+    opacity: {
+      value: 0.6,
+      random: true,
+      animation: {
+        enable: true,
+        speed: 1,
+        minimumValue: 0.3, // ✅ Creates a twinkle effect
+        sync: false,
+      },
+    },
+    size: {
+      value: 2,
+      random: true,
+    },
+    move: {
+      enable: true,
+      speed: 0.1, // ✅ Very slow movement for a natural look
+      direction: "none",
+      random: true,
+      straight: false,
+      outModes: {
+        default: "out",
+      },
+    },
+  },
+};
 ---
 
-<!doctype html>
+<script>
+  import { type Container, type Engine, tsParticles } from "tsparticles-engine";
+  import { loadFull } from "tsparticles";
+
+  // the function name is the parameter passed to the init attribute
+  // required
+  // add the function to window is mandatory, it will be searched there
+  window.particlesInit = async function (engine: Engine) {
+    await loadFull(engine);
+  };
+
+  // the function name is the parameter passed to the loaded attribute
+  // optional
+  // add the function to window is mandatory, it will be searched there
+  window.particlesLoaded = function (container: Container) {
+    console.log("particlesLoaded callback");
+  };
+</script>
+
 <html lang="en">
   <head>
     <Head title={`${title} | ${SITE.NAME}`} description={description} />
   </head>
   <body>
+    <!-- ✅ Particles Container to prevent layout shifts -->
+    <div class="absolute inset-0 -z-10 pointer-events-none">
+      <Particles id="tsparticles" init="particlesInit" />
+    </div>
     <Header />
     <main>
       <slot />

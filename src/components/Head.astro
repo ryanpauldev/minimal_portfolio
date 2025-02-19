@@ -253,4 +253,82 @@ const { title, description, image = "/nano.png" } = Astro.props;
 
   document.addEventListener("DOMContentLoaded", setupBackToTopButton);
   document.addEventListener("astro:after-swap", setupBackToTopButton);
+
+  /////
+  function loadParticles() {
+    const isDarkMode = document.documentElement.classList.contains("dark");
+    const newColor = isDarkMode
+      ? "#ffffff" // White in dark mode
+      : [
+          "#ff0000",
+          "#ff9900",
+          "#ffee00",
+          "#33ff00",
+          "#0099ff",
+          "#6600ff",
+          "#ff00ff",
+        ]; // Rainbow colors
+
+    const existingParticles = window.tsParticles.domItem(0);
+    if (existingParticles) {
+      // ✅ Update particle system's color properly
+      existingParticles.options.particles.color.value = newColor;
+
+      // ✅ Refresh particles to apply the new color
+      existingParticles.refresh();
+      return; // ✅ Skip reloading particles
+    }
+
+    // ✅ First-time initialization
+    window.tsParticles.load("tsparticles", {
+      background: { color: "transparent" },
+      fullScreen: { zIndex: -1 },
+      particles: {
+        color: { value: newColor }, // ✅ Assign correct color based on theme
+        number: { value: 150 },
+        opacity: {
+          value: .5,
+          random: true,
+          animation: {
+            enable: true,
+            speed: 1,
+            minimumValue: 0.3,
+            sync: false,
+          },
+        },
+        size: { value: 2 },
+        move: {
+          enable: true,
+          speed: .1,
+          straight: false,
+          direction: "none",
+          outModes: { default: "out" },
+        },
+      },
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", loadParticles);
+
+  let lastTheme = document.documentElement.classList.contains("dark")
+    ? "dark"
+    : "light";
+
+  const observer = new MutationObserver(() => {
+    requestAnimationFrame(() => {
+      const currentTheme = document.documentElement.classList.contains("dark")
+        ? "dark"
+        : "light";
+
+      if (currentTheme !== lastTheme) {
+        lastTheme = currentTheme; // ✅ Only reload if the theme actually changed
+        setTimeout(loadParticles, 50); // ✅ Ensures smooth transition
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"], // ✅ Detects theme changes
+  });
 </script>
