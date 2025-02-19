@@ -271,35 +271,27 @@ const { title, description, image = "/nano.png" } = Astro.props;
 
     const existingParticles = window.tsParticles.domItem(0);
     if (existingParticles) {
-      // ✅ Update particle system's color properly
+      // ✅ Update color
       existingParticles.options.particles.color.value = newColor;
-
-      // ✅ Refresh particles to apply the new color
       existingParticles.refresh();
-      return; // ✅ Skip reloading particles
+      return;
     }
 
-    // ✅ First-time initialization
+    // ✅ Attach to `#particles-container` and remove `fullScreen`
     window.tsParticles.load("tsparticles", {
       background: { color: "transparent" },
-      fullScreen: { zIndex: -1 },
       particles: {
-        color: { value: newColor }, // ✅ Assign correct color based on theme
-        number: { value: 150 },
+        color: { value: newColor },
+        number: { value: 50 },
         opacity: {
-          value: .5,
+          value: 0.5,
           random: true,
-          animation: {
-            enable: true,
-            speed: 1,
-            minimumValue: 0.3,
-            sync: false,
-          },
+          animation: { enable: true, speed: 1, minimumValue: 0.3, sync: false },
         },
-        size: { value: 2 },
+        size: { value: 1 },
         move: {
           enable: true,
-          speed: .1,
+          speed: 0.1,
           straight: false,
           direction: "none",
           outModes: { default: "out" },
@@ -308,6 +300,7 @@ const { title, description, image = "/nano.png" } = Astro.props;
     });
   }
 
+  // ✅ Reload particles on theme change
   document.addEventListener("DOMContentLoaded", loadParticles);
 
   let lastTheme = document.documentElement.classList.contains("dark")
@@ -321,14 +314,14 @@ const { title, description, image = "/nano.png" } = Astro.props;
         : "light";
 
       if (currentTheme !== lastTheme) {
-        lastTheme = currentTheme; // ✅ Only reload if the theme actually changed
-        setTimeout(loadParticles, 50); // ✅ Ensures smooth transition
+        lastTheme = currentTheme;
+        setTimeout(loadParticles, 50);
       }
     });
   });
 
   observer.observe(document.documentElement, {
     attributes: true,
-    attributeFilter: ["class"], // ✅ Detects theme changes
+    attributeFilter: ["class"],
   });
 </script>

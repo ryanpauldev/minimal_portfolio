@@ -105,17 +105,14 @@ html.scrolled #back-to-top {
   /* ✅ Slightly boost visibility when hovered */
 }
 
-#tsparticles {
-  position: fixed !important;
-  /* ✅ Ensures particles stay in place */
+#particles-container {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
-  pointer-events: none;
-  /* ✅ Prevents interactions */
+  height: 100%;
   z-index: -1;
-  /* ✅ Ensures they remain behind everything */
-  background: transparent !important;
-  /* ✅ Ensures it blends with the theme */
+  /* ✅ Keeps it behind everything */
+  pointer-events: none;
+  /* ✅ Prevents interaction issues */
 }
