@@ -25,8 +25,8 @@ body {
 
 header {
   @apply fixed top-0 left-0 right-0 z-50 py-5;
-  @apply bg-cyan-50/75 dark:bg-zinc-900/25;
-  @apply backdrop-blur-sm saturate-200;
+  @apply bg-cyan-100/25 dark:bg-zinc-900/25;
+  @apply backdrop-blur-sm;
 }
 
 main {
