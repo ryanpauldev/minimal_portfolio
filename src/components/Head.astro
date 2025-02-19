@@ -256,53 +256,101 @@ const { title, description, image = "/nano.png" } = Astro.props;
 
   /////
   function loadParticles() {
+    if (!window.tsParticles) return; // ✅ Prevent errors if tsParticles is not loaded
+
     const isDarkMode = document.documentElement.classList.contains("dark");
-    const newColor = isDarkMode
-      ? "#ffffff" // White in dark mode
-      : [
-          "#ff0000",
-          "#ff9900",
-          "#ffee00",
-          "#33ff00",
-          "#0099ff",
-          "#6600ff",
-          "#ff00ff",
-        ]; // Rainbow colors
 
-    const existingParticles = window.tsParticles.domItem(0);
-    if (existingParticles) {
-      // ✅ Update color
-      existingParticles.options.particles.color.value = newColor;
-      existingParticles.refresh();
-      return;
-    }
+    const particlesConfig = isDarkMode
+      ? {
+          // 🌙 **DARK MODE (Starry Night)**
+          background: { color: "transparent" },
+          fullScreen: { enable: true, zIndex: -2 },
+          particles: {
+            color: { value: "#ffffff" }, // ✅ White stars
+            number: { value: 50 }, // ✅ 50 stars
+            opacity: {
+              value: 0.6,
+              random: true,
+              animation: {
+                enable: true,
+                speed: 1,
+                minimumValue: 0.3,
+                sync: false,
+              },
+            },
+            size: { value: 1 }, // ✅ Small stars
+            move: {
+              enable: true,
+              speed: 0.1,
+              straight: false,
+              direction: "none",
+              outModes: { default: "out" },
+            },
+          },
+        }
+      : {
+          // ☀️ **LIGHT MODE (Clouds + Butterflies)**
+          background: { color: "transparent" },
+          fullScreen: { enable: true, zIndex: -2 },
+          particles: {
+            number: { value: 20 }, // ✅ More visible particles
+            move: {
+              enable: true,
+              speed: 0.1,
+              direction: "right",
+              outModes: { default: "out" },
+            },
+            shape: {
+              type: ["image"],
+              image: [
+                {
+                  src: "/cloud.svg", // ✅ Cloud image (SVG)
+                  width: 120,
+                  height: 80,
+                },
+                {
+                  src: "/butterfly.svg", // ✅ Butterfly image (SVG)
+                  width: 50,
+                  height: 50,
+                },
+              ],
+            },
+            opacity: {
+              value: 0.8,
+              random: true,
+              animation: { enable: true, speed: 0.2, minimumValue: 0.5 },
+            },
+            size: {
+              value: 50, // ✅ Large for clouds, medium for butterflies
+              random: true,
+              animation: { enable: true, speed: 1, minimumValue: 20 },
+            },
+            move: {
+              enable: true,
+              speed: 0.2,
+              random: true,
+              outModes: { default: "out" },
+              path: { enable: true },
+            },
+          },
+        };
 
-    // ✅ Attach to `#particles-container` and remove `fullScreen`
-    window.tsParticles.load("tsparticles", {
-      background: { color: "transparent" },
-      particles: {
-        color: { value: newColor },
-        number: { value: 50 },
-        opacity: {
-          value: 0.5,
-          random: true,
-          animation: { enable: true, speed: 1, minimumValue: 0.3, sync: false },
-        },
-        size: { value: 1 },
-        move: {
-          enable: true,
-          speed: 0.1,
-          straight: false,
-          direction: "none",
-          outModes: { default: "out" },
-        },
-      },
-    });
+    // ✅ Remove existing particles before reloading (prevents duplicates)
+    window.tsParticles.dom().forEach((instance) => instance.destroy());
+
+    // ✅ Load new particle system
+    window.tsParticles.load("tsparticles", particlesConfig);
   }
 
-  // ✅ Reload particles on theme change
+  // ✅ Run particles on first page load
   document.addEventListener("DOMContentLoaded", loadParticles);
 
+  // ✅ Reload particles after Astro page transitions
+  document.addEventListener("astro:after-swap", () => {
+    setTimeout(loadParticles, 1);
+  });
+
+  // ✅ Watch for theme changes and reload particles
   let lastTheme = document.documentElement.classList.contains("dark")
     ? "dark"
     : "light";
@@ -312,10 +360,9 @@ const { title, description, image = "/nano.png" } = Astro.props;
       const currentTheme = document.documentElement.classList.contains("dark")
         ? "dark"
         : "light";
-
       if (currentTheme !== lastTheme) {
         lastTheme = currentTheme;
-        setTimeout(loadParticles, 50);
+        setTimeout(loadParticles, 1);
       }
     });
   });
