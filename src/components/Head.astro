@@ -104,7 +104,6 @@ const { title, description, image = "/nano.png" } = Astro.props;
       toggleTheme(true);
     });
 
-    
     //one button to switch between themes
     const systemThemeButton = document.getElementById("system-theme-button");
     systemThemeButton?.addEventListener("click", () => {
@@ -220,4 +219,38 @@ const { title, description, image = "/nano.png" } = Astro.props;
   document.addEventListener("DOMContentLoaded", () => init());
   document.addEventListener("astro:after-swap", () => init());
   preloadTheme();
+
+  function setupBackToTopButton() {
+    const backToTopButton = document.getElementById("back-to-top");
+
+    if (!backToTopButton) return;
+
+    function toggleBackToTop() {
+      if (window.scrollY > 100) {
+        backToTopButton.style.opacity = "1"; // ✅ Smooth fade-in
+        backToTopButton.style.pointerEvents = "auto"; // ✅ Ensure it's clickable when visible
+      } else {
+        backToTopButton.style.opacity = "0"; // ✅ Smooth fade-out
+        setTimeout(() => {
+          if (window.scrollY === 0) {
+            backToTopButton.style.pointerEvents = "none"; // ✅ Prevent clicks AFTER fading out
+          }
+        }, 500); // Match CSS transition time
+      }
+    }
+
+    window.addEventListener("scroll", toggleBackToTop);
+
+    backToTopButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
+      setTimeout(() => {
+        window.dispatchEvent(new Event("scroll"));
+      }, 300);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", setupBackToTopButton);
+  document.addEventListener("astro:after-swap", setupBackToTopButton);
 </script>

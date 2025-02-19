@@ -1,7 +1,7 @@
 import type { Site, Metadata, Socials } from "@types";
 
 export const SITE: Site = {
-  NAME: "Ryan Paul's Portfolio",
+  NAME: "Ryan Paul",
   EMAIL: "ryan.r.paul22@gmail.com",
   NUM_POSTS_ON_HOMEPAGE: 3,
   NUM_WORKS_ON_HOMEPAGE: 2,
@@ -29,12 +29,19 @@ export const PROJECTS: Metadata = {
 };
 
 export const SOCIALS: Socials = [
-  { 
-    NAME: "github",
-    HREF: "https://github.com/ryanpauldev"
-  },
-  { 
-    NAME: "linkedin",
+  {
+    NAME: "LinkedIn",
     HREF: "https://www.linkedin.com/in/ryan-paul-dev/",
-  }
+    ICON: "/icons/linkedin.svg", // Path to downloaded LinkedIn SVG
+  },
+  {
+    NAME: "GitHub",
+    HREF: "https://github.com/ryanpauldev",
+    ICON: "/icons/github.svg", // Path to downloaded GitHub SVG
+  },
+  {
+    NAME: "Email",
+    HREF: "mailto:ryan.r.paul22@gmail.com",
+    ICON: "/icons/email.svg", // Path to downloaded Email SVG
+  },
 ];

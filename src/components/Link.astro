@@ -5,15 +5,23 @@ type Props = {
   href: string;
   external?: boolean;
   underline?: boolean;
-}
+};
 
 const { href, external, underline = true, ...rest } = Astro.props;
 ---
 
-<a 
-  href={href} 
-  target={ external ? "_blank" : "_self" } 
-  class={cn("inline-block decoration-black/15 dark:decoration-white/30 hover:decoration-black/25 hover:dark:decoration-white/50 text-current hover:text-black hover:dark:text-white transition-colors duration-300 ease-in-out", underline && "underline underline-offset-2")}
-  {...rest}>
-  <slot/>
+<a
+  href={href}
+  target={external ? "_blank" : "_self"}
+  class={cn(
+    "inline-block text-blue-600 dark:text-blue-500", // Default text color (blue)
+    "decoration-black/15 dark:decoration-white/30", // Default underline color
+    "hover:text-black hover:dark:text-white", // Light mode: Turns black on hover; Dark mode: stays white
+    "hover:decoration-black/25 hover:dark:decoration-white/50", // Hover underline effect
+    "transition-colors duration-300 ease-in-out", // Smooth transition
+    underline && "underline underline-offset-2", // Adds underline if enabled
+  )}
+  {...rest}
+>
+  <slot />
 </a>
