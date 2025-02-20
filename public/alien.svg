@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="64" height="64" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+    <!-- Alien Head -->
+    <path
+        d="M 90 10 C 140 10, 170 60, 160 110 C 155 140, 120 170, 90 180 C 60 170, 25 140, 20 110 C 10 60, 40 10, 90 10 Z"
+        fill="#32cd32"
+    />
+    
+    <!-- Antennas -->
+    <line x1="70" y1="40" x2="70" y2="20" stroke="black" stroke-width="3"/>
+    <line x1="110" y1="40" x2="110" y2="20" stroke="black" stroke-width="3"/>
+
+    <!-- Eyes -->
+    <ellipse cx="75" cy="110" rx="10" ry="18" fill="black"/>
+    <ellipse cx="105" cy="110" rx="10" ry="18" fill="black"/>
+
+    <!-- Pupils -->
+    <circle cx="75" cy="110" r="3" fill="black"/>
+    <circle cx="105" cy="110" r="3" fill="black"/>
+
+    <!-- Neutral Mouth -->
+    <path d="M75 155h30" stroke="black" stroke-width="3"/>
+</svg>

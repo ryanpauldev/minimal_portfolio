@@ -101,11 +101,11 @@ export default function Tracker() {
                     {/* 👽 Alien (Dark Mode) */}
                     <path
                         d="M 90 10 C 140 10, 170 60, 160 110 C 155 140, 120 170, 90 180 C 60 170, 25 140, 20 110 C 10 60, 40 10, 90 10 Z"
-                        className="fill-green-900 dark:fill-green-500"
+                        className="fill-lime-900 dark:fill-lime-600"
                     />
                     {/* 🛸 Antennas */}
-                    <line x1="70" y1="40" x2="70" y2="20" className="stroke-green-300 dark:stroke-green-600 stroke-[3]" />
-                    <line x1="110" y1="40" x2="110" y2="20" className="stroke-green-300 dark:stroke-green-600 stroke-[3]" />
+                    <line x1="70" y1="40" x2="70" y2="20" className="stroke-black dark:stroke-black black stroke-[3]" />
+                    <line x1="110" y1="40" x2="110" y2="20" className="stroke-black dark:stroke-black stroke-[3]" />
                 </>
             ) : (
                 <>
