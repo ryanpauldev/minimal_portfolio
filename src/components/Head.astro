@@ -262,29 +262,26 @@ const { title, description, image = "/nano.png" } = Astro.props;
 
     const particlesConfig = isDarkMode
       ? {
-          // 🌙 **DARK MODE (Starry Night)**
+          // 🌙 **DARK MODE (Timelapse Starry Sky)**
           background: { color: "transparent" },
           fullScreen: { enable: true, zIndex: -2 },
           particles: {
-            color: { value: "#ffffff" }, // ✅ White stars
+            color: { value: ["#ffffff", "#DAF7A6", "#89CFF0"] }, // ✅ White & Yellow stars
             number: { value: 50 }, // ✅ 50 stars
             opacity: {
               value: 0.6,
               random: true,
               animation: {
                 enable: true,
-                speed: 1,
-                minimumValue: 0.3,
-                sync: false,
               },
             },
-            size: { value: 1 }, // ✅ Small stars
+            size: { value: 1.2 }, // ✅ Slightly larger stars
             move: {
               enable: true,
-              speed: 0.1,
-              straight: false,
-              direction: "none",
-              outModes: { default: "out" },
+              speed: 0.08, // ✅ All stars move at the same slow speed
+              direction: "right", // ✅ Moves from left to right
+              straight: true, // ✅ No random movement, smooth flow
+              outModes: { default: "out" }, // ✅ When a star leaves, a new one enters
             },
           },
         }
@@ -293,7 +290,7 @@ const { title, description, image = "/nano.png" } = Astro.props;
           background: { color: "transparent" },
           fullScreen: { enable: true, zIndex: -2 },
           particles: {
-            number: { value: 20 }, // ✅ More visible particles
+            number: { value: 20 },
             move: {
               enable: true,
               speed: 0.1,
@@ -303,16 +300,8 @@ const { title, description, image = "/nano.png" } = Astro.props;
             shape: {
               type: ["image"],
               image: [
-                {
-                  src: "/cloud.svg", // ✅ Cloud image (SVG)
-                  width: 120,
-                  height: 80,
-                },
-                {
-                  src: "/butterfly.svg", // ✅ Butterfly image (SVG)
-                  width: 50,
-                  height: 50,
-                },
+                { src: "/cloud.svg", width: 120, height: 80 },
+                { src: "/butterfly.svg", width: 50, height: 50 },
               ],
             },
             opacity: {
@@ -321,7 +310,7 @@ const { title, description, image = "/nano.png" } = Astro.props;
               animation: { enable: true, speed: 0.2, minimumValue: 0.5 },
             },
             size: {
-              value: 50, // ✅ Large for clouds, medium for butterflies
+              value: 50,
               random: true,
               animation: { enable: true, speed: 1, minimumValue: 20 },
             },
