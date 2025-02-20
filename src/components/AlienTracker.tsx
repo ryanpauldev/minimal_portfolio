@@ -130,27 +130,32 @@ export default function Tracker() {
                 cx={positions.leftEye.x}
                 cy={positions.leftEye.y}
                 rx={isDarkMode ? "10" : "12"}
-                ry={isDarkMode ? (isBlinking ? "0" : "18") : "14"}
+                ry={isBlinking ? "0" : isDarkMode ? "18" : "14"}
                 className="fill-white dark:fill-black transition-[ry] duration-150 ease-in-out"
             />
             <ellipse
                 cx={positions.rightEye.x}
                 cy={positions.rightEye.y}
                 rx={isDarkMode ? "10" : "12"}
-                ry={isDarkMode ? (isBlinking ? "0" : "18") : "14"}
+                ry={isBlinking ? "0" : isDarkMode ? "18" : "14"}
                 className="fill-white dark:fill-black transition-[ry] duration-150 ease-in-out"
             />
 
-            {/* 🔵 Pupils (Follow Mouse) */}
-            <circle cx={positions.leftPupil.x} cy={positions.leftPupil.y} r="3" className="fill-black" />
-            <circle cx={positions.rightPupil.x} cy={positions.rightPupil.y} r="3" className="fill-black" />
+            {/* 🔵 Pupils (Only Visible When Eyes Are Open) */}
+            {!isBlinking && (
+                <>
+                    <circle cx={positions.leftPupil.x} cy={positions.leftPupil.y} r="3" className="fill-black" />
+                    <circle cx={positions.rightPupil.x} cy={positions.rightPupil.y} r="3" className="fill-black" />
+                </>
+            )}
 
-            {/* 😐 Neutral Mouth */}
+            {/* 😐 Neutral / Smiling Mouth */}
             {isDarkMode ? (
                 <path d="M75 155h30" className="stroke-black stroke-[3]" />
             ) : (
                 <path d="M75 155 Q90 160, 105 155" className="stroke-amber-800 stroke-[3] fill-none" />
             )}
         </svg>
+
     );
 }
