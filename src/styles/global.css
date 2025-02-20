@@ -110,3 +110,14 @@ html.scrolled #back-to-top {
 * {
   pointer-events: auto;
 }
+
+#back-to-top {
+  pointer-events: auto;
+  z-index: 10;
+  /* Keep it lower than the 👽 button */
+}
+
+#emoji-button {
+  pointer-events: auto;
+  z-index: 9999;
+}
