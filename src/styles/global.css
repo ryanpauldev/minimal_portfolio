@@ -116,3 +116,7 @@ html.scrolled #back-to-top {
   pointer-events: none;
   /* ✅ Prevents interaction issues */
 }
+
+* {
+  pointer-events: auto;
+}

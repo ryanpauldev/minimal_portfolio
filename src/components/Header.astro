@@ -1,15 +1,20 @@
 ---
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
+import AlienTracker from "@components/AlienTracker";
 import { SITE } from "@consts";
 ---
 
 <header>
   <Container>
-    <div class="flex flex-wrap gap-y-2 justify-between">
-      <Link href="/" underline={false}>
-        <div class="font-semibold">Home</div>
-      </Link>
+    <div class="flex flex-wrap gap-y-2 justify-between place-items-center">
+      <a
+        href="/"
+        class="flex items-center justify-center w-12 h-12 overflow-hidden"
+      >
+        <AlienTracker client:load />
+      </a>
+
       <nav class="flex gap-1">
         <Link underline={false} href="/work"> Work </Link>
         <span>
