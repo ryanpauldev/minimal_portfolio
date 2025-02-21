@@ -364,7 +364,7 @@ const { title, description, image = "/nano.png" } = Astro.props;
   });
 
   //rainbow bgs
-  document.addEventListener("DOMContentLoaded", () => {
+  function setupRainbowHoverEffect() {
     const links = document.querySelectorAll(".cycle-hover-bg");
 
     const colors = [
@@ -406,5 +406,13 @@ const { title, description, image = "/nano.png" } = Astro.props;
         colors.forEach((color) => link.classList.remove(color));
       });
     });
+  }
+
+  // ✅ Run the function on initial load
+  document.addEventListener("DOMContentLoaded", setupRainbowHoverEffect);
+
+  // ✅ Re-run the function after each page transition
+  document.addEventListener("astro:after-swap", () => {
+    setTimeout(setupRainbowHoverEffect, 1); // Give Astro time to swap content
   });
 </script>
