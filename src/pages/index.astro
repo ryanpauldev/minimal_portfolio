@@ -7,7 +7,6 @@ import Link from "@components/Link.astro";
 import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
 
-
 const blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -141,18 +140,21 @@ const work = await Promise.all(
                   href={social.HREF}
                   external
                   aria-label={`Ryan Paul on ${social.NAME}`}
+                  class="group" 
                 >
                   <img
                     src={social.ICON}
                     alt={social.NAME}
                     width="30"
                     height="30"
-                    class="transition-all duration-300 opacity-75 hover:opacity-100 dark:invert"
+                    class="transition-all duration-300 opacity-75 hover:opacity-100 dark:invert group-hover:invert-0" 
+                    
                   />
                 </Link>
               </li>
             ))
           }
+
         </ul>
       </section>
     </div>

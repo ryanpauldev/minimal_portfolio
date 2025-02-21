@@ -5,9 +5,16 @@ type Props = {
   href: string;
   external?: boolean;
   underline?: boolean;
+  class?: string /* ✅ Add support for `class` prop */;
 };
 
-const { href, external, underline = true, ...rest } = Astro.props;
+const {
+  href,
+  external,
+  underline = true,
+  class: customClass,
+  ...rest
+} = Astro.props;
 ---
 
 <a
@@ -15,11 +22,11 @@ const { href, external, underline = true, ...rest } = Astro.props;
   target={external ? "_blank" : "_self"}
   class={cn(
     "relative group w-fit flex items-center h-10 px-4 flex-nowrap rounded",
-    "border border-black/15 dark:border-white/20",
-    "hover:bg-cyan-200 dark:hover:bg-zinc-800 hover:text-black dark:hover:text-white",
-    "transition-all duration-300 ease-in-out text-sm",
-    "glowing-border",
-    "text-inherit" /* ✅ Forces inherited text color */,
+    "border border-black/25 dark:border-white/25", // ✅ Using Tailwind border colors
+    "cycle-hover-bg dark:hover:bg-lime-500", // ✅ Tailwind hover background colors
+    "hover:text-gray-900 dark:hover:text-black", // ✅ Tailwind hover text colors
+    "transition-colors duration-300 ease-in-out text-sm",
+    "text-inherit font-semibold",
     underline && "underline underline-offset-2",
   )}
   {...rest}

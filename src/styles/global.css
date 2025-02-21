@@ -110,3 +110,7 @@ html.scrolled #back-to-top {
 * {
   pointer-events: auto;
 }
+
+.dark:hover\\:invert-0:hover {
+  filter: invert(0);
+}

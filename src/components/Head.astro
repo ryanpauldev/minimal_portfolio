@@ -362,4 +362,49 @@ const { title, description, image = "/nano.png" } = Astro.props;
     attributes: true,
     attributeFilter: ["class"],
   });
+
+  //rainbow bgs
+  document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll(".cycle-hover-bg");
+
+    const colors = [
+      "bg-red-200",
+      "bg-orange-200",
+      "bg-amber-200",
+      "bg-yellow-200",
+      "bg-lime-200",
+      "bg-green-200",
+      "bg-emerald-200",
+      "bg-teal-200",
+      "bg-cyan-200",
+      "bg-sky-200",
+      "bg-blue-200",
+      "bg-indigo-200",
+      "bg-violet-200",
+      "bg-purple-200",
+      "bg-fuchsia-200",
+      "bg-pink-200",
+      "bg-rose-200",
+    ];
+
+    let colorIndex = 0; // Keeps track of current color
+
+    links.forEach((link) => {
+      link.addEventListener("mouseenter", () => {
+        // Remove existing colors
+        colors.forEach((color) => link.classList.remove(color));
+
+        // Apply the next color in the cycle
+        link.classList.add(colors[colorIndex]);
+
+        // Move to the next color (loop back if at the end)
+        colorIndex = (colorIndex + 1) % colors.length;
+      });
+
+      // Optional: Reset background when mouse leaves
+      link.addEventListener("mouseleave", () => {
+        colors.forEach((color) => link.classList.remove(color));
+      });
+    });
+  });
 </script>
