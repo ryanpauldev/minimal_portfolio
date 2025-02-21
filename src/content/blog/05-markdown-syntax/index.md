@@ -2,6 +2,7 @@
 title: "Markdown syntax guide"
 description: "Get started writing content in markdown."
 date: "Mar 17 2024"
+draft: False
 ---
 
 ---
@@ -126,10 +127,10 @@ Add an quick link using the `<url>` pattern.
 Add an email link using the `<emailaddress>` pattern.
 
 ```md
-Email me at <markhorn.dev@gmail.com> using your mail app.
+Email me at <ryan.r.paul22@gmail.com> using your mail app.
 ```
 
-Email me at <markhorn.dev@gmail.com> using your mail app.
+Email me at <ryan.r.paul22@gmail.com> using your mail app.
 
 ---
 
