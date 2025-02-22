@@ -45,19 +45,21 @@ const work = await Promise.all(
           <p class="animate">
             I'm a <strong>Full-Stack Developer</strong> with a passion for building
             scalable web applications and interactive user experiences. With a <strong
-              >BA in Computer Science from Rutgers New Brunswick</strong
+              >B.A. in Computer Science from Rutgers New Brunswick</strong
             >, I enjoy solving complex problems with modern technologies.
           </p>
+
           <p class="animate">
-            My expertise spans <strong
-              >React, Next.js, TypeScript, Node.js, and cloud services</strong
-            >, allowing me to build fast, efficient, and scalable solutions.
-            Whether it's frontend UI/UX development or backend architecture, I
-            strive to deliver high-performance applications.
+            I specialize in <strong
+              >React, Next.js, TypeScript, Node.js, and cloud computing</strong
+            >, enabling the development of fast, efficient, and scalable
+            applications. My expertise encompasses both frontend UI/UX design
+            and backend architecture, ensuring high-performance solutions.
           </p>
           <p class="animate">
-            I'm always exploring new technologies and open to collaboration.
-            Check out my latest work and feel free to reach out!
+            I am continuously exploring emerging technologies and welcome
+            collaboration. Take a look at my latest work, and feel free to reach
+            out!
           </p>
         </article>
       </section>
@@ -77,9 +79,8 @@ const work = await Promise.all(
                   {dateRange(entry.data.dateStart, entry.data.dateEnd)}
                 </div>
                 <div class="font-semibold text-black dark:text-white">
-                  {entry.data.company}
+                  {entry.data.role}, {entry.data.company}
                 </div>
-                <div class="text-sm opacity-75">{entry.data.role}</div>
                 <article>
                   <entry.Content />
                 </article>
@@ -127,9 +128,8 @@ const work = await Promise.all(
         <h5 class="font-semibold text-black dark:text-white">Let's Connect</h5>
         <article>
           <p>
-            If you're interested in working together, discussing a project, or
-            just saying hi, feel free to connect with me on social media or send
-            me an email.
+            If you are interested in collaborating, discussing a project, or
+            networking, feel free to reach out via social media or email.
           </p>
         </article>
         <ul class="flex flex-wrap gap-2">
@@ -140,21 +140,19 @@ const work = await Promise.all(
                   href={social.HREF}
                   external
                   aria-label={`Ryan Paul on ${social.NAME}`}
-                  class="group" 
+                  class="group"
                 >
                   <img
                     src={social.ICON}
                     alt={social.NAME}
                     width="30"
                     height="30"
-                    class="transition-all duration-300 opacity-75 hover:opacity-100 dark:invert group-hover:invert-0" 
-                    
+                    class="transition-all duration-300 opacity-75 hover:opacity-100 dark:invert group-hover:invert-0"
                   />
                 </Link>
               </li>
             ))
           }
-
         </ul>
       </section>
     </div>
