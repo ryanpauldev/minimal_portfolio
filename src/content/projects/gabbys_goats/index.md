@@ -7,13 +7,14 @@ repoURL: "https://github.com/ryanpauldev/gabbys_goats"
 image: "/gabbys-goats.png"
 ---
 
+<a href="https://gabbys-goats.vercel.app/" target="_blank">
+  <img src="/gabbys-goats.png" alt="Gabby's GOATS (Giving Others Assistance To Serve)" />
+</a>
+
 ## Overview
 
 Gabby's GOATS is a heartfelt foundation dedicated to honoring the legacy of Gabrielle Kraft Buckman by supporting those who selflessly serve others. The platform enables donations, shares Gabby's inspiring story, and connects with the community through various features.
 
-<a href="https://gabbys-goats.vercel.app/" target="_blank">
-  <img src="/gabbys-goats.png" alt="Gabby's GOATS (Giving Others Assistance To Serve)" />
-</a>
 
 ### Tech Stack
 
