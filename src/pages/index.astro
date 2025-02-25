@@ -6,7 +6,6 @@ import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
 import { dateRange } from "@lib/utils";
 import { SITE, HOME, SOCIALS } from "@consts";
-import BaseHead from '../components/Head.astro';
 
 const blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -33,139 +32,129 @@ const work = await Promise.all(
   }),
 );
 ---
-<html>
-  <head>
-    <BaseHead 
-      title="Ryan Paul | Developer"
-      description="Full-stack developer specializing in modern web applications."
-      image="/og-image-02.png"
-    />
-  </head>
-  <body>
-    <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
-      <Container>
-        <h4 class="animate font-semibold text-black dark:text-white">Ryan Paul</h4>
-        <h4 class="animate font-semibold text-black dark:text-white">
-          Software Engineer
-        </h4>
-        <div class="space-y-16">
-          <section>
-            <article class="space-y-4">
-              <p class="animate">
-                I'm a <strong>Full-Stack Developer</strong> with a passion for building
-                scalable web applications and interactive user experiences. With a <strong
-                  >B.A. in Computer Science from Rutgers New Brunswick</strong
-                >, I enjoy solving complex problems with modern technologies.
-              </p>
 
-              <p class="animate">
-                I specialize in <strong
-                  >React, Next.js, TypeScript, Node.js, and cloud computing</strong
-                >, enabling the development of fast, efficient, and scalable
-                applications. My expertise encompasses both frontend UI/UX design
-                and backend architecture, ensuring high-performance solutions.
-              </p>
-              <p class="animate">
-                I am continuously exploring emerging technologies and welcome
-                collaboration. Take a look at my latest work, and feel free to reach
-                out!
-              </p>
-            </article>
-          </section>
+<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+  <Container>
+    <h4 class="animate font-semibold text-black dark:text-white">Ryan Paul</h4>
+    <h4 class="animate font-semibold text-black dark:text-white">
+      Software Engineer
+    </h4>
+    <div class="space-y-16">
+      <section>
+        <article class="space-y-4">
+          <p class="animate">
+            I'm a <strong>Full-Stack Developer</strong> with a passion for building
+            scalable web applications and interactive user experiences. With a <strong
+              >B.A. in Computer Science from Rutgers New Brunswick</strong
+            >, I enjoy solving complex problems with modern technologies.
+          </p>
 
-          <section class="animate space-y-6">
-            <div class="flex flex-wrap gap-y-2 items-center justify-between">
-              <h5 class="font-semibold text-black dark:text-white">
-                Work Experience
-              </h5>
-              <Link underline={false} href="/work"> See all work </Link>
-            </div>
-            <ul class="flex flex-col space-y-4">
-              {
-                work.map((entry) => (
-                  <li>
-                    <div class="text-sm opacity-75">
-                      {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-                    </div>
-                    <div class="font-semibold text-black dark:text-white">
-                      {entry.data.role}, {entry.data.company}
-                    </div>
-                    <article>
-                      <entry.Content />
-                    </article>
-                  </li>
-                ))
-              }
-            </ul>
-          </section>
+          <p class="animate">
+            I specialize in <strong
+              >React, Next.js, TypeScript, Node.js, and cloud computing</strong
+            >, enabling the development of fast, efficient, and scalable
+            applications. My expertise encompasses both frontend UI/UX design
+            and backend architecture, ensuring high-performance solutions.
+          </p>
+          <p class="animate">
+            I am continuously exploring emerging technologies and welcome
+            collaboration. Take a look at my latest work, and feel free to reach
+            out!
+          </p>
+        </article>
+      </section>
 
-          <section class="animate space-y-6">
-            <div class="flex flex-wrap gap-y-2 items-center justify-between">
-              <h5 class="font-semibold text-black dark:text-white">
-                Recent Projects
-              </h5>
-              <Link underline={false} href="/projects"> See all projects </Link>
-            </div>
-            <ul class="flex flex-col gap-4">
-              {
-                projects.map((project) => (
-                  <li>
-                    <ArrowCard entry={project} />
-                  </li>
-                ))
-              }
-            </ul>
-          </section>
-
-          <section class="animate space-y-6">
-            <div class="flex flex-wrap gap-y-2 items-center justify-between">
-              <h5 class="font-semibold text-black dark:text-white">Latest Posts</h5>
-              <Link underline={false} href="/blog"> See all posts </Link>
-            </div>
-            <ul class="flex flex-col gap-4">
-              {
-                blog.map((post) => (
-                  <li>
-                    <ArrowCard entry={post} />
-                  </li>
-                ))
-              }
-            </ul>
-          </section>
-
-          <section class="animate space-y-4">
-            <h5 class="font-semibold text-black dark:text-white">Let's Connect</h5>
-            <article>
-              <p>
-                If you are interested in collaborating, discussing a project, or
-                networking, feel free to reach out via social media or email.
-              </p>
-            </article>
-            <ul class="flex flex-wrap gap-2">
-              {
-                SOCIALS.map((social) => (
-                  <li>
-                    <Link
-                      href={social.HREF}
-                      external
-                      aria-label={`Ryan Paul on ${social.NAME}`}
-                      class="group"
-                    >
-                      <img
-                        src={social.ICON}
-                        alt={social.NAME}
-                        width="30"
-                        height="30"
-                        class="transition-all duration-300 opacity-75 hover:opacity-100 dark:invert group-hover:invert-0"
-                      />
-                    </Link>
-                  </li>
-                ))
-              }
-            </ul>
-          </section>
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h5 class="font-semibold text-black dark:text-white">
+            Work Experience
+          </h5>
+          <Link underline={false} href="/work"> See all work </Link>
         </div>
-      </Container>
-    </PageLayout>
-  </body>
-</html>
+        <ul class="flex flex-col space-y-4">
+          {
+            work.map((entry) => (
+              <li>
+                <div class="text-sm opacity-75">
+                  {dateRange(entry.data.dateStart, entry.data.dateEnd)}
+                </div>
+                <div class="font-semibold text-black dark:text-white">
+                  {entry.data.role}, {entry.data.company}
+                </div>
+                <article>
+                  <entry.Content />
+                </article>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h5 class="font-semibold text-black dark:text-white">
+            Recent Projects
+          </h5>
+          <Link underline={false} href="/projects"> See all projects </Link>
+        </div>
+        <ul class="flex flex-col gap-4">
+          {
+            projects.map((project) => (
+              <li>
+                <ArrowCard entry={project} />
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h5 class="font-semibold text-black dark:text-white">Latest Posts</h5>
+          <Link underline={false} href="/blog"> See all posts </Link>
+        </div>
+        <ul class="flex flex-col gap-4">
+          {
+            blog.map((post) => (
+              <li>
+                <ArrowCard entry={post} />
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="animate space-y-4">
+        <h5 class="font-semibold text-black dark:text-white">Let's Connect</h5>
+        <article>
+          <p>
+            If you are interested in collaborating, discussing a project, or
+            networking, feel free to reach out via social media or email.
+          </p>
+        </article>
+        <ul class="flex flex-wrap gap-2">
+          {
+            SOCIALS.map((social) => (
+              <li>
+                <Link
+                  href={social.HREF}
+                  external
+                  aria-label={`Ryan Paul on ${social.NAME}`}
+                  class="group"
+                >
+                  <img
+                    src={social.ICON}
+                    alt={social.NAME}
+                    width="30"
+                    height="30"
+                    class="transition-all duration-300 opacity-75 hover:opacity-100 dark:invert group-hover:invert-0"
+                  />
+                </Link>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+  </Container>
+</PageLayout>

@@ -17,12 +17,22 @@ interface Props {
   description: string;
   image?: string;
 }
-
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description, image = "/og-image-02.png" } = Astro.props;
+const { title, description, image = "/og-image.png" } = Astro.props;
 
-// Create the formatted title
-const formattedTitle = title.includes('| Ryan Paul') ? title : `${title} | Ryan Paul`;
+// Clean title formatting
+const cleanTitle = title.replace(/\s*\|\s*Ryan Paul/g, "").trim();
+const formattedTitle = `${cleanTitle} | Ryan Paul`;
+
+// Get the base URL from the environment or use the current URL
+const baseURL = import.meta.env.DEV 
+  ? Astro.url.origin  // Uses current URL in development (e.g., https://tricky-ducks-notice.loca.lt)
+  : 'https://www.ryanpaul.dev';  // Production URL
+
+// Construct full image URL - use provided image or fallback
+const ogImage = image 
+  ? new URL(image, baseURL).toString()
+  : new URL("/og-image.png", baseURL).toString();
 ---
 
 <!-- Global Metadata -->
@@ -57,8 +67,8 @@ const formattedTitle = title.includes('| Ryan Paul') ? title : `${title} | Ryan 
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Primary Meta Tags -->
-<title>{title}</title>
-<meta name="title" content={title} />
+<title>{formattedTitle}</title>
+<meta name="title" content={formattedTitle} />
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook / Discord -->
@@ -66,17 +76,17 @@ const formattedTitle = title.includes('| Ryan Paul') ? title : `${title} | Ryan 
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={formattedTitle} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.site)} />
+<meta property="og:image" content={ogImage} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content={`Preview of ${title}`} />
+<meta property="og:image:alt" content={`Preview of ${cleanTitle}`} />
 
 <!-- Twitter Card Meta Tags -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content={canonicalURL} />
 <meta name="twitter:title" content={formattedTitle} />
 <meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={new URL(image, Astro.site)} />
+<meta name="twitter:image" content={ogImage} />
 
 <ClientRouter />
 

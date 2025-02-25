@@ -4,6 +4,7 @@ description: "Fundraising platform for a charitable organization"
 date: "Feb 1 2025"
 demoURL: "https://gabbys-goats.vercel.app/"
 repoURL: "https://github.com/ryanpauldev/gabbys_goats"
+image: "/gabbys-goats.png"
 ---
 
 ## Overview

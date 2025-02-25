@@ -102,7 +102,7 @@ Your content here...
 ---
 title: "Project Title"
 description: "Project description"
-date: "Feb 25 2024"
+date: "Feb 25 2025"
 demoURL: "https://demo.com"
 repoURL: "https://github.com/username/repo"
 ---
@@ -147,7 +147,7 @@ To customize:
 1. Add your image to /public/
 2. Update Head.astro meta tags:
 
-<meta property="og:image" content="https://www.ryanpaul.dev/og-image-02.png" />
+<meta property="og:image" content="https://www.ryanpaul.dev/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 ```

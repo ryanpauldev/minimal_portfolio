@@ -1,8 +1,9 @@
 ---
 title: "Implementing Clover Payment SDK"
 description: "A step-by-step guide for integrating Clover's iframe and SDK API into a Next.js application."
-date: "Feb 25 2024"
+date: "Feb 25 2025"
 draft: false
+image: "/clover-iframe.jpg"
 ---
 
 ## Overview

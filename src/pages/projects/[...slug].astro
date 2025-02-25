@@ -23,8 +23,10 @@ const { Content } = await project.render();
 ---
 
 <PageLayout 
-  title={project.data.title}
-  description={project.data.description}>
+  title={project.data.title} 
+  description={project.data.description}
+  image={project.data.image}
+>
   <Container>
     <div class="animate">
       <BackToPrev href="/projects"> Back to projects </BackToPrev>
