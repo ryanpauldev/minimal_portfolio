@@ -1,0 +1,19 @@
+---
+interface Props {
+  type: 'Person' | 'Article' | 'WebSite' | 'Project';
+  data: Record<string, any>;
+}
+
+const { type, data } = Astro.props;
+
+// Base schema
+let schema: Record<string, any> = {
+  '@context': 'https://schema.org',
+  '@type': type
+};
+
+// Merge with provided data
+schema = { ...schema, ...data };
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

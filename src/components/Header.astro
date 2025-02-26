@@ -2,34 +2,74 @@
 import Container from "@components/Container.astro";
 import Link from "@components/Link.astro";
 import AlienTracker from "@components/AlienTracker";
+
+// Get current path to highlight active nav item
+const currentPath = Astro.url.pathname;
 ---
 
 <header>
   <Container>
-    <div class="flex items-center justify-between w-full">
-      <!-- Left: AlienTracker -->
+    <div
+      class="flex items-center justify-between w-full"
+      itemscope
+      itemtype="https://schema.org/SiteNavigationElement"
+    >
+      <!-- Left: AlienTracker with improved semantics -->
       <a
         href="/"
         class="flex items-center justify-center w-12 h-12"
-        aria-label="Home"
+        aria-label="Ryan Paul - Home Page"
+        itemprop="url"
       >
+        <span itemprop="name" class="sr-only">Ryan Paul</span>
         <AlienTracker client:load />
       </a>
 
-      <!-- Center: Navigation Links -->
-      <nav class="flex gap-1 absolute left-1/2 transform -translate-x-1/2">
-        <Link underline={false} href="/work"> Work </Link>
-        <span>{""}</span>
-        <Link underline={false} href="/projects"> Projects </Link>
-        <span>{""}</span>
-        <Link underline={false} href="/blog"> Blog </Link>
+      <!-- Center: Navigation Links with improved semantics -->
+      <nav
+        aria-label="Main navigation"
+        class="flex gap-1 absolute left-1/2 transform -translate-x-1/2"
+      >
+        <Link
+          underline={false}
+          href="/work"
+          class={currentPath.startsWith("/work") ? "font-semibold" : ""}
+          aria-current={currentPath.startsWith("/work") ? "page" : undefined}
+          itemprop="url"
+        >
+          <span itemprop="name">Work</span>
+        </Link>
+        <span aria-hidden="true">{""}</span>
+        <Link
+          underline={false}
+          href="/projects"
+          class={currentPath.startsWith("/projects") ? "font-semibold" : ""}
+          aria-current={currentPath.startsWith("/projects")
+            ? "page"
+            : undefined}
+          itemprop="url"
+        >
+          <span itemprop="name">Projects</span>
+        </Link>
+        <span aria-hidden="true">{""}</span>
+        <Link
+          underline={false}
+          href="/blog"
+          class={currentPath.startsWith("/blog") ? "font-semibold" : ""}
+          aria-current={currentPath.startsWith("/blog") ? "page" : undefined}
+          itemprop="url"
+        >
+          <span itemprop="name">Blog</span>
+        </Link>
       </nav>
 
-      <!-- Right: Theme Toggle Button -->
+      <!-- Right: Theme Toggle Button with improved semantics -->
       <button
         id="theme-toggle-button"
-        aria-label="Toggle theme"
+        aria-label="Toggle dark mode"
+        title="Toggle light/dark theme"
         class="group px-2 rounded-md transition-colors duration-300 flex items-center justify-center"
+        aria-pressed="false"
       >
         <!-- Light Mode Icon (Sun) -->
         <svg
@@ -43,6 +83,7 @@ import AlienTracker from "@components/AlienTracker";
           stroke-width="1.5"
           stroke-linecap="round"
           stroke-linejoin="round"
+          aria-hidden="true"
           class="stroke-yellow-500 fill-yellow-500 group-hover:fill-yellow-300 group-hover:stroke-yellow-200 transition-colors duration-300 ease-in-out hidden"
         >
           <circle cx="12" cy="12" r="5"></circle>
@@ -68,10 +109,12 @@ import AlienTracker from "@components/AlienTracker";
           stroke-width="1"
           stroke-linecap="round"
           stroke-linejoin="round"
+          aria-hidden="true"
           class="stroke-current fill-yellow-500 group-hover:fill-yellow-300 group-hover:stroke-black dark:group-hover:fill-yellow-400 dark:group-hover:stroke-white transition-colors duration-300 ease-in-out"
         >
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
+        <span class="sr-only">Switch to light/dark theme</span>
       </button>
     </div>
   </Container>

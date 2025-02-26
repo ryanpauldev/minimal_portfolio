@@ -6,14 +6,16 @@ import BackToTop from "@components/BackToTop.astro";
 import { SITE } from "@consts";
 import Particles from "astro-particles";
 import type { ISourceOptions } from "tsparticles-engine";
+import StructuredData from '@components/StructuredData.astro';
 
 type Props = {
   title: string;
   description: string;
   image?: string;
+  type?: string;  // Add this line
 };
 
-const { title, description, image } = Astro.props;
+const { title, description, image, type = "website" } = Astro.props;
 
 // Format title to include site name
 const pageTitle = `${title} | ${SITE.NAME}`;
@@ -65,6 +67,16 @@ const options: ISourceOptions = {
     },
   },
 };
+
+const websiteSchema = {
+  name: 'Ryan Paul | Portfolio Website',
+  url: Astro.site?.toString(),
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${Astro.site}search?q={search_term_string}`,
+    'query-input': 'required name=search_term_string'
+  }
+};
 ---
 
 <script>
@@ -92,7 +104,23 @@ const options: ISourceOptions = {
       title={pageTitle}
       description={description}
       image={image}
+      type={type}
     />
+    <!-- Add website structured data -->
+    <StructuredData type="WebSite" data={websiteSchema} />
+    
+    <!-- Add person structured data for home page -->
+    {Astro.url.pathname === '/' && (
+      <StructuredData type="Person" data={{
+        name: 'Ryan Paul',
+        jobTitle: 'Software Engineer',
+        url: Astro.site?.toString(),
+        sameAs: [
+          'https://www.linkedin.com/in/ryan-paul-dev/',
+          'https://github.com/ryanpauldev'
+        ]
+      }} />
+    )}
   </head>
   <body>
     <!-- ✅ Particles Container to prevent layout shifts -->

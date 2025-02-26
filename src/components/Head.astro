@@ -16,9 +16,16 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  type?: string;
 }
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const { title, description, image = "/og-image.png" } = Astro.props;
+const { 
+  title, 
+  description, 
+  image = "/og-image.png",
+  type = "website" 
+} = Astro.props;
 
 // Clean title formatting
 const cleanTitle = title.replace(/\s*\|\s*Ryan Paul/g, "").trim();
@@ -72,7 +79,7 @@ const ogImage = image
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook / Discord -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={formattedTitle} />
 <meta property="og:description" content={description} />
